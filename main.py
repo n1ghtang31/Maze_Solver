@@ -1,7 +1,7 @@
 from graphics import Window, Line, Point
 
 def main():
-    win = Window(800, 600)
+    win = Window(1600, 900)
     line1 = Line(Point(50, 50), Point(400, 400))
     win.draw_line(line1, "Green")
     win.wait_for_close()
