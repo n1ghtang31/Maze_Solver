@@ -75,5 +75,7 @@ class Cell:
             line = Line(Point(x1, y2), Point(x2, y2))
             self._win.draw_line(line)
         
-            
+    def draw_move(self, to_cell, undo=False):
+        pass
+        #So to find center you need to minus x2 - x1 divide by 2 then adde to x1 repeat for y-coords        
             
