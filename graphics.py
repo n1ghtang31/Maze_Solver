@@ -38,6 +38,9 @@ class Point:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+
+    def __str__(self):
+        return f"X: {self.x} Y: {self.y}"
         
 class Line:
     def __init__(self, p1, p2):
@@ -62,6 +65,13 @@ class Cell:
         self._win = _win
 
     def draw(self, x1, y1, x2, y2):
+        if self._win is None:
+            return
+        self._x1 = x1
+        self._x2 = x2
+        self._y1 = y1
+        self._y2 = y2
+
         if self.has_left_wall:
             line = Line(Point(x1, y1), Point(x1, y2))
             self._win.draw_line(line)
@@ -76,6 +86,22 @@ class Cell:
             self._win.draw_line(line)
         
     def draw_move(self, to_cell, undo=False):
-        pass
-        #So to find center you need to minus x2 - x1 divide by 2 then adde to x1 repeat for y-coords        
-            
+        center_from = self.find_center()
+        from_canvas = self._win
+        center_to = to_cell.find_center()
+        travel_line = Line(center_from, center_to)
+        if undo == True:
+            from_canvas.draw_line(travel_line, fill_color="red")
+        else:
+            from_canvas.draw_line(travel_line, fill_color="gray")
+
+    def find_center(self):
+        # So to find center you need to minus x2 - x1 divide by 2 then adde to x1 repeat for y-coords        
+        minus_x = abs(self._x2 - self._x1)      
+        divide_x = minus_x // 2
+        add_x = divide_x + self._x1
+
+        minus_y = abs(self._y2 - self._y1)      
+        divide_y = minus_y // 2
+        add_y = divide_y + self._y1
+        return Point(add_x, add_y)
