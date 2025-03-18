@@ -15,5 +15,16 @@ class Tests(unittest.TestCase):
             num_rows,
         )
 
+    def test_entrance_and_exit(self):
+        num_cols = 12
+        num_rows = 8
+        m2 = Maze(0,0,num_rows,num_cols,10,10)
+        self.assertFalse(
+            m2._cells[0][0].has_top_wall
+        )
+        self.assertFalse(
+            m2._cells[num_rows - 1][num_cols - 1].has_bottom_wall
+        )
+
 if __name__ == "__main__":
     unittest.main()
