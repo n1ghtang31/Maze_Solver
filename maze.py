@@ -1,4 +1,5 @@
 import time
+import random
 from graphics import Cell, Point, Line
 class Maze:
     def __init__(
@@ -10,6 +11,7 @@ class Maze:
             cell_size_x, 
             cell_size_y, 
             win = None, 
+            seed=None,
         ):
         self.x1 = x1
         self.y1 = y1
@@ -17,11 +19,15 @@ class Maze:
         self.num_cols = num_cols
         self.cell_size_x = cell_size_x
         self.cell_size_y = cell_size_y
+        self.seed = seed
         self._win = win
         self._cells = []
         self._create_cells()
         self._break_entrance_and_exit()
-    
+
+        if self.seed is not None:
+            self.seed = random.seed(seed)
+
     def _create_cells(self):
         # Create a matrix of cells
         for i in range(self.num_cols):
@@ -63,4 +69,15 @@ class Maze:
         self._cells[self.num_rows - 1][self.num_cols - 1].has_bottom_wall = False
         self._draw_cells(self.num_rows - 1, self.num_cols - 1)
 
+    def _break_walls_r(self, i, j):
+        self._cells[i][j].visited = True
+
+        while True:
+            need_to_visit = []
+
+            # Search to the right
+            if i < self.num_cols - 1 and not self._cells[i+1][j].visited:
+                need_to_visit.append(self._cells[i+1][j])
+            # Search bottom
+            
 
