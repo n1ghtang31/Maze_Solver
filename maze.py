@@ -79,5 +79,14 @@ class Maze:
             if i < self.num_cols - 1 and not self._cells[i+1][j].visited:
                 need_to_visit.append(self._cells[i+1][j])
             # Search bottom
+            if j < self.num_rows -1 and not self._cells[i][j+1].visited:
+                need_to_visit.append(self._cells[i][j+1])
+            # Search left
+            if i > 0 and not self._cells[i-1][j].visited:
+                need_to_visit.append(self._cells[i-1][j])
+            # Search top
+            if j > 0 and not self._cells[i][j-1].visited:
+                need_to_visit.append(self._cells[i][j-1])
+
             
 
