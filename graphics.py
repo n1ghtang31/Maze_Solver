@@ -104,9 +104,9 @@ class Cell:
         center_to = to_cell.find_center()
         travel_line = Line(center_from, center_to)
         if undo == True:
-            from_canvas.draw_line(travel_line, fill_color="red")
-        else:
             from_canvas.draw_line(travel_line, fill_color="gray")
+        else:
+            from_canvas.draw_line(travel_line, fill_color="red")
 
     def find_center(self):
         # So to find center you need to minus x2 - x1 divide by 2 then adde to x1 repeat for y-coords        
